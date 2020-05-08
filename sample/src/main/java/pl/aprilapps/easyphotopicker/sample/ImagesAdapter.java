@@ -1,7 +1,6 @@
 package pl.aprilapps.easyphotopicker.sample;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +8,11 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
-import java.io.File;
 import java.util.List;
+
+import androidx.recyclerview.widget.RecyclerView;
+import pl.aprilapps.easyphotopicker.MediaFile;
+
 
 /**
  * Created by Jacek Kwiecień on 08.11.2016.
@@ -19,9 +21,9 @@ import java.util.List;
 public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ViewHolder> {
 
     private Context context;
-    private List<File> imagesFiles;
+    private List<MediaFile> imagesFiles;
 
-    public ImagesAdapter(Context context, List<File> imagesFiles) {
+    public ImagesAdapter(Context context, List<MediaFile> imagesFiles) {
         this.context = context;
         this.imagesFiles = imagesFiles;
     }
@@ -34,8 +36,8 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Picasso.with(context)
-                .load(imagesFiles.get(position))
+        Picasso.get()
+                .load(imagesFiles.get(position).getFile())
                 .fit()
                 .centerCrop()
                 .into(holder.imageView);
